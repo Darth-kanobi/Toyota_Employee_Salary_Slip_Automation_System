@@ -10,7 +10,12 @@ async function handleResponse(res) {
 
 export const api = {
   // Stats
-  getStats: () => fetch(`${API_BASE}/api/stats`).then(handleResponse),
+  getStats: (month, year) => {
+    const params = new URLSearchParams();
+    if (month) params.append("month", month);
+    if (year) params.append("year", year);
+    return fetch(`${API_BASE}/api/stats?${params}`).then(handleResponse);
+  },
 
   // Employees
   getEmployees: () => fetch(`${API_BASE}/api/employees`).then(handleResponse),

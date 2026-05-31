@@ -32,7 +32,7 @@ model SalaryRecord {
   month      Int
   year       Int
   createdAt  DateTime  @default(now())
-  employee   Employee  @relation(fields: [employeeId], references: [employeeId])
+  employee   Employee  @relation(fields: [employeeId], references: [employeeId], onDelete: Cascade)
   emailLog   EmailLog?
 
   @@unique([employeeId, month, year])
@@ -47,6 +47,6 @@ model EmailLog {
   errorMessage   String?
   sentAt         DateTime?
   createdAt      DateTime     @default(now())
-  salaryRecord   SalaryRecord @relation(fields: [salaryRecordId], references: [id])
-  employee       Employee     @relation(fields: [employeeId], references: [employeeId])
+  salaryRecord   SalaryRecord @relation(fields: [salaryRecordId], references: [id], onDelete: Cascade)
+  employee       Employee     @relation(fields: [employeeId], references: [employeeId], onDelete: Cascade)
 }

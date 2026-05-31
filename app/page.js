@@ -11,7 +11,10 @@ export default function DashboardPage() {
   useEffect(() => {
     async function loadStats() {
       try {
-        const res = await api.getStats();
+        const now = new Date();
+        const currentMonth = now.getMonth() + 1;
+        const currentYear = now.getFullYear();
+        const res = await api.getStats(currentMonth, currentYear);
         setStats(res.data);
       } catch (err) {
         setError(err.message);

@@ -67,6 +67,10 @@ export async function sendSalaryEmail(employee, month, year, pdfBuffer) {
     if (!mxRecords || mxRecords.length === 0) {
       throw new Error(`Domain ${domain} has no mail servers.`);
     }
+    // Check for "Null MX" records (RFC 7505) - domain explicitly rejects email
+    if (mxRecords.length === 1 && (mxRecords[0].exchange === '' || mxRecords[0].exchange === '.')) {
+      throw new Error(`Domain ${domain} does not accept email (Null MX).`);
+    }
   } catch (err) {
     throw new Error(`Invalid or non-existent email domain for ${employee.email}`);
   }

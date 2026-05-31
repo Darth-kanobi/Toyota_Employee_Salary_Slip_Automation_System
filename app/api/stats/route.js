@@ -3,11 +3,12 @@ export const dynamic = "force-dynamic";
 import prisma from "../../lib/prisma";
 
 // GET /api/stats — dashboard stats
-export async function GET() {
+export async function GET(req) {
   try {
+    const { searchParams } = new URL(req.url);
     const now = new Date();
-    const currentMonth = now.getMonth() + 1;
-    const currentYear = now.getFullYear();
+    const currentMonth = searchParams.has("month") ? parseInt(searchParams.get("month"), 10) : now.getMonth() + 1;
+    const currentYear = searchParams.has("year") ? parseInt(searchParams.get("year"), 10) : now.getFullYear();
 
     const [
       totalEmployees,
