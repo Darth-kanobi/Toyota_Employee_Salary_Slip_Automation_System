@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Employee Salary Slip Automation
 
-## Getting Started
+A full-stack Next.js application that automates the process of generating and emailing salary slip PDFs from CSV/Excel payroll data.
 
-First, run the development server:
+## Tech Stack
+- **Framework:** Next.js 14 (App Router)
+- **Database:** Neon PostgreSQL + Prisma ORM
+- **PDF Generation:** pdfkit
+- **Email:** Nodemailer (Gmail SMTP)
+- **File Parsing:** csv-parser, xlsx
+- **File Archival:** Cloudinary
+- **Styling:** Custom CSS Custom Properties (Dark Theme)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Prerequisites
+1. Node.js 18+
+2. Neon Database ([neon.tech](https://neon.tech/))
+3. Cloudinary Account
+4. Gmail Account with App Passwords enabled
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local Setup
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Environment Variables**
+   Fill in `.env` with your API keys (see `.env.example`).
+   ```bash
+   cp .env.example .env
+   ```
 
-## Learn More
+3. **Database Migration**
+   Run Prisma migrations to create the tables in Neon.
+   ```bash
+   npx prisma db push
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:3000` in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment (Vercel)
+This app is designed as a single Next.js unified deployment.
+1. Push your code to GitHub.
+2. Link the repository in Vercel.
+3. Add all the environment variables from your `.env` to Vercel.
+4. Set the build command to `npm run build && npx prisma generate` (if not detected automatically).
+5. Deploy!
