@@ -61,7 +61,7 @@ export function generateSalarySlipPDF(employee, salaryRecord) {
       doc.rect(50, tableStartY, pageWidth, 28).fill("#eef2ff");
       doc.font("Helvetica-Bold").fontSize(9).fillColor("#4a5568");
       doc.text("COMPONENT", 70, tableStartY + 9);
-      doc.text("AMOUNT (₹)", 50 + colWidths[0] + 20, tableStartY + 9);
+      doc.text("AMOUNT (Rs.)", 50 + colWidths[0] + 20, tableStartY + 9);
 
       // Table rows
       const rows = [
@@ -85,7 +85,7 @@ export function generateSalarySlipPDF(employee, salaryRecord) {
 
         doc.text(row.label, 70, currentY + 8);
         const amountPrefix = row.type === "deduction" ? "- " : "";
-        doc.text(`${amountPrefix}₹${row.amount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`, 50 + colWidths[0] + 20, currentY + 8);
+        doc.text(`${amountPrefix}Rs. ${row.amount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`, 50 + colWidths[0] + 20, currentY + 8);
         currentY += 26;
       });
 
@@ -95,7 +95,7 @@ export function generateSalarySlipPDF(employee, salaryRecord) {
       doc.font("Helvetica-Bold").fontSize(12).fillColor("#ffffff");
       doc.text("NET SALARY", 70, currentY + 13);
       doc.fontSize(14).text(
-        `₹${salaryRecord.netSalary.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`,
+        `Rs. ${salaryRecord.netSalary.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`,
         50 + colWidths[0] + 20,
         currentY + 12
       );
